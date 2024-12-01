@@ -48,8 +48,10 @@ function create() {
     player = this.physics.add.sprite(0, 0, 'player');
     player.setCollideWorldBounds(true);
     player.setScale(0.5);
-
     randomSpawn.call(this, player);
+
+    playerPowerText = this.add.text(player.x, player.y - 20, `Power: ${playerPowerLevel}`, { fontSize: '16px', fill: '#ffffff' });
+    playerPowerText.setOrigin(0.5);
 
     enemies = this.physics.add.group();
     powerUps = this.physics.add.group();
@@ -62,7 +64,6 @@ function create() {
     });
 
     scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
-    playerPowerText = this.add.text(16, 56, `Player Power: ${playerPowerLevel}`, { fontSize: '18px', fill: '#fff' });
 
     this.time.addEvent({
         delay: 1000,
@@ -99,6 +100,8 @@ function update() {
         player.setVelocityY(0);
     }
 
+    playerPowerText.setPosition(player.x, player.y - 20);
+
     enemies.getChildren().forEach(enemy => {
         enemy.powerText.setPosition(enemy.x, enemy.y - 20);
     });
@@ -120,7 +123,7 @@ function spawnEnemy() {
     let enemyPower = Math.round(gaussianRandom(playerPowerLevel, std_dev));
     enemy.powerLevel = Math.max(enemyPower, 1); // Ensure power level is at least 1
     
-    //enemy.setScale(Math.max(.01, 0.3 + (enemy.powerLevel * 0.05)));
+    //enemy.setScale(0.3 + (enemy.powerLevel * 0.05));
     this.physics.moveToObject(enemy, player, 80 + enemy.powerLevel * 10);
 
     enemy.powerText = this.add.text(enemy.x, enemy.y - 20, `Power: ${enemy.powerLevel}`, { fontSize: '16px', fill: '#ffffff' });
@@ -155,6 +158,7 @@ function respawnPlayer() {
     randomSpawn.call(this, player);
     playerPowerLevel = Math.max(0, playerPowerLevel - 2);  // Lose some power, but not below 0
     updatePlayerPowerDisplay();
+    playerPowerText.setPosition(player.x, player.y - 20);
 }
 
 function hitEnemy(player, enemy) {
@@ -183,5 +187,5 @@ function collectPowerUp(player, powerUp) {
 }
 
 function updatePlayerPowerDisplay() {
-    playerPowerText.setText(`Player Power: ${playerPowerLevel}`);
+    playerPowerText.setText(`Power: ${playerPowerLevel}`);
 }
