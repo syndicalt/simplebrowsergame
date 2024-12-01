@@ -44,12 +44,6 @@ function preload() {
 }
 
 function create() {
-    const width = this.scale.width;
-    const height = this.scale.height;
-
-    const randomBackground = Phaser.Math.RND.pick(backgrounds);
-    this.add.image(width/2, height/2, randomBackground).setDisplaySize(width, height);
-    
     if (this.sys.game.device.input.touch) {
         joyStick = this.plugins.get('rexVirtualJoystick').add(this, {
             x: 100,
@@ -62,6 +56,12 @@ function create() {
             enable: true
         });
     }
+    
+    const width = this.scale.width;
+    const height = this.scale.height;
+
+    const randomBackground = Phaser.Math.RND.pick(backgrounds);
+    this.add.image(width/2, height/2, randomBackground).setDisplaySize(width, height);
 
     player = this.physics.add.sprite(0, 0, 'player');
     player.setCollideWorldBounds(true);
