@@ -30,6 +30,7 @@ let scoreText;
 let playerPowerLevel = 0;
 let playerPowerText;
 let backgrounds = ['fantasy_forest_map', 'mystical_cavern'];
+let joyStick;
 
 function preload() {
     this.load.svg('fantasy_forest_map', 'assets/fantasy_forest_map.svg');
@@ -48,6 +49,19 @@ function create() {
 
     const randomBackground = Phaser.Math.RND.pick(backgrounds);
     this.add.image(width/2, height/2, randomBackground).setDisplaySize(width, height);
+    
+    if (this.sys.game.device.input.touch) {
+        joyStick = this.plugins.get('rexVirtualJoystick').add(this, {
+            x: 100,
+            y: height - 100,
+            radius: 50,
+            base: this.add.circle(0, 0, 50, 0x888888),
+            thumb: this.add.circle(0, 0, 25, 0xcccccc),
+            dir: '8dir',
+            forceMin: 16,
+            enable: true
+        });
+    }
 
     player = this.physics.add.sprite(0, 0, 'player');
     player.setCollideWorldBounds(true);
@@ -88,20 +102,28 @@ function create() {
 }
 
 function update() {
-    if (keys.left.isDown) {
-        player.setVelocityX(-160);
-    } else if (keys.right.isDown) {
-        player.setVelocityX(160);
-    } else {
-        player.setVelocityX(0);
-    }
+    if (joyStick && joyStick.force > 16) {
+        const speed = 160;
+        player.setVelocity(
+            joyStick.forceX * speed,
+            joyStick.forceY * speed
+        ) 
+    } else if (keys) { 
+        if (keys.left.isDown) {
+            player.setVelocityX(-160);
+        } else if (keys.right.isDown) {
+            player.setVelocityX(160);
+        } else {
+            player.setVelocityX(0);
+        }
 
-    if (keys.up.isDown) {
-        player.setVelocityY(-160);
-    } else if (keys.down.isDown) {
-        player.setVelocityY(160);
-    } else {
-        player.setVelocityY(0);
+        if (keys.up.isDown) {
+            player.setVelocityY(-160);
+        } else if (keys.down.isDown) {
+            player.setVelocityY(160);
+        } else {
+            player.setVelocityY(0);
+        }
     }
 
     playerPowerText.setPosition(player.x, player.y - 20);
