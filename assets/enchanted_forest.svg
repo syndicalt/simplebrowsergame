@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Sky background -->
+  <rect width="100%" height="100%" fill="#87CEEB"/>
+  
+  <!-- Sun -->
+  <circle cx="700" cy="100" r="60" fill="#FFD700"/>
+  
+  <!-- Hills -->
+  <path d="M0 400 Q200 300 400 400 Q600 300 800 400 L800 600 L0 600 Z" fill="#228B22"/>
+  
+  <!-- Trees -->
+  <g id="tree">
+    <path d="M0 0 L20 -60 L40 0 Z" fill="#006400"/>
+    <rect x="18" y="0" width="4" height="20" fill="#8B4513"/>
+  </g>
+  <use href="#tree" x="100" y="450"/>
+  <use href="#tree" x="300" y="420"/>
+  <use href="#tree" x="500" y="440"/>
+  <use href="#tree" x="700" y="430"/>
+  
+  <!-- Magical pond -->
+  <ellipse cx="400" cy="500" rx="100" ry="50" fill="#4169E1" opacity="0.7"/>
+  
+  <!-- Floating lights -->
+  <g fill="#FFFF00" opacity="0.5">
+    <circle cx="200" cy="300" r="5"/>
+    <circle cx="350" cy="250" r="4"/>
+    <circle cx="600" cy="350" r="6"/>
+    <circle cx="750" cy="280" r="3"/>
+  </g>
+</svg>

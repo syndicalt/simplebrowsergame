@@ -29,9 +29,12 @@ let score = 0;
 let scoreText;
 let playerPowerLevel = 0;
 let playerPowerText;
+let backgrounds = ['fantasy_forest_map', 'mystical_cavern'];
 
 function preload() {
-    this.load.svg('background', 'assets/fantasy_forest_map.svg');
+    this.load.svg('fantasy_forest_map', 'assets/fantasy_forest_map.svg');
+    this.load.svg('mystical_cavern', 'assets/mystical_cavern.svg');
+    this.load.svg('enchanted_forest', 'assets/enchanted_forest.svg');
     this.load.svg('player', 'assets/knight.svg');
     this.load.svg('dragon', 'assets/dragon.svg');
     this.load.svg('orc', 'assets/orc.svg');
@@ -43,7 +46,8 @@ function create() {
     const width = this.scale.width;
     const height = this.scale.height;
 
-    this.add.image(width/2, height/2, 'background').setDisplaySize(width, height);
+    const randomBackground = Phaser.Math.RND.pick(backgrounds);
+    this.add.image(width/2, height/2, randomBackground).setDisplaySize(width, height);
 
     player = this.physics.add.sprite(0, 0, 'player');
     player.setCollideWorldBounds(true);

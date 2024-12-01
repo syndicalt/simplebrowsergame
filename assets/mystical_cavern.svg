@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Dark cavern background -->
+  <rect width="100%" height="100%" fill="#1a1a2e"/>
+  
+  <!-- Stalactites -->
+  <path d="M0 0 L30 80 L60 0 M200 0 L230 100 L260 0 M400 0 L430 90 L460 0 M600 0 L630 70 L660 0" fill="#3a3a5c"/>
+  
+  <!-- Stalagmites -->
+  <path d="M100 600 L130 500 L160 600 M300 600 L330 480 L360 600 M500 600 L530 520 L560 600 M700 600 L730 540 L760 600" fill="#3a3a5c"/>
+  
+  <!-- Underground river -->
+  <path d="M0 400 Q200 350 400 400 Q600 450 800 400" fill="none" stroke="#16456d" stroke-width="20"/>
+  
+  <!-- Glowing crystals -->
+  <g fill="#8a2be2" opacity="0.7">
+    <circle cx="100" cy="200" r="10"/>
+    <circle cx="300" cy="150" r="15"/>
+    <circle cx="500" cy="250" r="12"/>
+    <circle cx="700" cy="180" r="8"/>
+  </g>
+</svg>
